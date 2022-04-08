@@ -36,7 +36,9 @@ class Jornada(Resource):
         for jornada in jornadas:
             if jornada['jornada_id'] == jornada_id:
                 return jornada
-            return None;
+            #return None;
+
+    #def find_jornadass(self, jornada_id):
 
     def get(self, jornada_id):
         jornada = Jornada.find_jornada(jornada_id)
@@ -72,4 +74,6 @@ class Jornada(Resource):
 
 
     def delete(self, jornada_id):
-        pass
+        global jornadas
+        jornadas = [jornada for jornada in jornadas if jornada['jornada_id'] != jornada_id]
+        return {'message': 'jornada deleted'}
