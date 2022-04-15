@@ -1,6 +1,8 @@
 from flask_restful import Resource, reqparse
 from models.jornada import JornadaModel
 
+from logging import debug, info, warning, critical, error, basicConfig
+from logging import FileHandler, StreamHandler # são os objetos q gerenciam os exporters, por exemplo, handler que envia para arquivo, para stdout
 jornadas = [
 
     {
@@ -48,7 +50,8 @@ class Jornada(Resource):
     def get(self, jornada_id):
         jornada = Jornada.find_jornada(jornada_id)
         if jornada:
-            return jornada
+            return jornada, info("leu todas as jornadas"), debug("debugando")
+
         return {'message': 'jornada not found'}, 404
 
 
